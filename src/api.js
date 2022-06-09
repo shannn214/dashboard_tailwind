@@ -41,3 +41,4 @@ API.interceptors.response.use(
 
 export const getEmployees = () => API.get(`/employeesDataMock.json`)
 export const getCustomers = () => API.get(`/customersDataMock.json`)
+export const getOrders = () => API.get(`/ordersDataMock.json`)

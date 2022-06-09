@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   GridComponent,
   ColumnsDirective,
@@ -14,19 +14,30 @@ import {
   Inject,
 } from '@syncfusion/ej2-react-grids'
 
-import { ordersData, contextMenuItems, ordersGrid } from '../data/dummy'
+import { ordersGrid } from '../data/dummy'
 import { Header } from '../components'
+import { getOrders } from '../api'
 
 const Orders = () => {
+  const [orders, setOrders] = useState([])
+
+  useEffect(() => {
+    handleGetCustomers()
+  }, [])
+
+  const handleGetCustomers = async () => {
+    try {
+      const _orders = await getOrders()
+      setOrders(_orders.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl">
       <Header category="Page" title="Orders" />
-      <GridComponent
-        id="gridcomp"
-        dataSource={ordersData}
-        allowPaging
-        allowSorting
-      >
+      <GridComponent id="gridcomp" dataSource={orders} allowPaging allowSorting>
         <ColumnsDirective>
           {ordersGrid.map((item, index) => (
             <ColumnDirective key={index} {...item} />
