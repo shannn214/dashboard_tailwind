@@ -13,7 +13,7 @@ import {
   Edit,
 } from '@syncfusion/ej2-react-grids'
 
-import { customersData, customersGrid } from '../data/dummy'
+import { customersGrid } from '../data/dummy'
 import { Header } from '../components'
 import { getCustomers } from '../api'
 
@@ -26,9 +26,8 @@ const Customers = () => {
 
   const handleGetCustomers = async () => {
     try {
-      const _employees = await getCustomers()
-      console.log(_employees, '====')
-      setCustomers(_employees.data)
+      const _customers = await getCustomers()
+      setCustomers(_customers.data)
     } catch (error) {
       console.log(error)
     }

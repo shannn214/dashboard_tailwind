@@ -9,7 +9,7 @@ import {
   Toolbar,
 } from '@syncfusion/ej2-react-grids'
 
-import { employeesData, employeesGrid } from '../data/dummy'
+import { employeesGrid } from '../data/dummy'
 import { Header } from '../components'
 import { getEmployees } from '../api'
 
@@ -23,7 +23,6 @@ const Employees = () => {
   const handleGetEmployees = async () => {
     try {
       const _employees = await getEmployees()
-      console.log(_employees, '====')
       setEmployees(_employees.data)
     } catch (error) {
       console.log(error)
