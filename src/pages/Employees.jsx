@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   GridComponent,
   ColumnsDirective,
@@ -11,13 +11,30 @@ import {
 
 import { employeesData, employeesGrid } from '../data/dummy'
 import { Header } from '../components'
+import { getEmployees } from '../api'
 
 const Employees = () => {
+  const [employees, setEmployees] = useState([])
+
+  useEffect(() => {
+    handleGetEmployees()
+  }, [])
+
+  const handleGetEmployees = async () => {
+    try {
+      const _employees = await getEmployees()
+      console.log(_employees, '====')
+      setEmployees(_employees.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl">
       <Header category="Page" title="Emplpoyees" />
       <GridComponent
-        dataSource={employeesData}
+        dataSource={employees}
         allowPaging
         allowSorting
         toolbar={['Search']}
